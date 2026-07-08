@@ -1,10 +1,22 @@
 [{
         "id": 1,
-        "name": "Samsung Galaxy S25",
+        "name": "iPhone 16",
+        "images": [
+            "images": [
+                "...1.jpg",
+                "...2.jpg",
+                "...3.jpg",
+                "...4.jpg"
+            ]
+        ],
+        "image": "images/products/iphone16-1.jpg",
         "price": 79999,
-        "image": "images/product1.jpg",
         "category": "Mobiles",
-        "rating": 4.8
+        "rating": 4.8,
+        "stock": "In Stock",
+        "discount": 20,
+        "brand": "Apple",
+        "description": "Latest Apple smartphone."
     },
     {
         "id": 2,
@@ -15,7 +27,7 @@
         "rating": 4.9
     },
     {
-        "id": 1,
+        "id": 3,
         "name": "iPhone 16",
         "price": 79999,
         "category": "Mobiles",

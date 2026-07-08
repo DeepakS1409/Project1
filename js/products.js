@@ -97,7 +97,7 @@ function createCard(product) {
 
                 <span class="discount">
 
-                    ${product.discount}% OFF
+                    ${product.discount || 0}% OFF
 
                 </span>
 
@@ -105,28 +105,34 @@ function createCard(product) {
 
             <p class="stock">
 
-                Stock :
-                ${product.stock}
+                <p class="stock">
 
+                    <i class="fa-solid fa-box"></i>
+
+                    Stock :
+
+                    ${product.stock}
+
+                </p>
             </p>
 
             <div class="product-buttons">
 
                 <button class="cart-btn"
-                    onclick="addToCart(${product.id})">
+onclick="event.stopPropagation(); addToCart(${product.id})">
 
-                    <i class="fa-solid fa-cart-shopping"></i>
+    <i class="fa-solid fa-cart-shopping"></i>
 
-                    Add to Cart
+    Add to Cart
 
-                </button>
+</button>
 
-                <button class="wish-btn"
-                    onclick="addToWishlist(${product.id})">
+<button class="wish-btn"
+onclick="event.stopPropagation(); addToWishlist(${product.id})">
 
-                    <i class="fa-solid fa-heart"></i>
+    <i class="fa-solid fa-heart"></i>
 
-                </button>
+</button>
 
             </div>
 
@@ -199,7 +205,7 @@ function addToWishlist(id) {
 
     if (exists) {
 
-        showToast("Already in Wishlist ❤️");
+        showToast(product.name + " is already in Wishlist ❤️");
 
         return;
 
@@ -240,7 +246,7 @@ function updateCartCount() {
 
     });
 
-    badge.innerHTML = total;
+    badge.innerHTML = total > 99 ? "99+" : total;
 
 }
 /*==========================================
@@ -260,8 +266,7 @@ function updateWishlistCount() {
     ||
     [];
 
-    badge.innerHTML = wishlist.length;
-
+    badge.innerHTML = wishlist.length > 99 ? "99+" : wishlist.length;
 }
 /*==========================================
         FILTERS
@@ -324,12 +329,15 @@ function filterProducts() {
 
     filteredProducts = products.filter(product => {
 
-        const matchName =
+        const matchSearch =
 
-            product.name
-            .toLowerCase()
-            .includes(keyword);
+            product.name.toLowerCase().includes(keyword) ||
 
+            product.category.toLowerCase().includes(keyword) ||
+
+            (product.brand || "").toLowerCase().includes(keyword) ||
+
+            product.description.toLowerCase().includes(keyword);
         const matchCategory =
 
             category === "all"
@@ -338,7 +346,7 @@ function filterProducts() {
 
         product.category === category;
 
-        return matchName && matchCategory;
+        return matchSearch && matchCategory;
 
     });
 
@@ -444,7 +452,7 @@ function showToast(message) {
 
     toast.className = "toast";
 
-    toast.innerHTML = message;
+    toast.textContent = message;
 
     document.body.appendChild(toast);
 

@@ -2,6 +2,8 @@ const params = new URLSearchParams(window.location.search);
 
 const productId = Number(params.get("id"));
 
+const mainImage = document.getElementById("mainImage");
+
 let quantity = 1;
 
 document.getElementById("plusBtn").onclick = () => {
@@ -42,24 +44,49 @@ async function loadProduct() {
         return;
 
     }
+    const wishlist =
+        JSON.parse(localStorage.getItem("wishlist")) || [];
 
-    mainImage.src = currentProduct.image;
+    const wishBtn = document.getElementById("wishlistBtn");
 
-    thumb1.src = currentProduct.image;
+    if (wishlist.some(item => item.id === currentProduct.id)) {
 
-    thumb2.src = currentProduct.image;
+        wishBtn.innerHTML =
+            `<i class="fa-solid fa-heart"></i> Wishlisted`;
 
-    thumb3.src = currentProduct.image;
+    }
 
-    thumb4.src = currentProduct.image;
+    const images = currentProduct.images || [currentProduct.image];
+
+    mainImage.src = images[0];
+
+    thumb1.src = images[0] || "";
+
+    thumb2.src = images[1] || images[0];
+
+    thumb3.src = images[2] || images[0];
+
+    thumb4.src = images[3] || images[0];
 
     category.innerHTML = currentProduct.category;
 
     productName.innerHTML = currentProduct.name;
 
-    rating.innerHTML = currentProduct.rating;
+    rating.innerHTML =
+
+        `⭐ ${currentProduct.rating} / 5`;
 
     price.innerHTML = currentProduct.price.toLocaleString();
+
+    const old = Math.round(currentProduct.price * 1.20);
+
+    oldPrice.innerHTML = old.toLocaleString();
+
+    discount.innerHTML = 20;
+
+    saving.innerHTML =
+
+        (old - currentProduct.price).toLocaleString();
 
     stock.innerHTML = currentProduct.stock;
 
@@ -76,24 +103,43 @@ async function loadProduct() {
 
     loadRelatedProducts(products);
 
+
 }
 
 // Call the function
 loadProduct();
 
 // Thumbnail click event (OUTSIDE loadProduct)
-document.querySelectorAll(".thumb").forEach(image => {
+const thumbs = document.querySelectorAll(".thumb");
 
-    image.onclick = () => {
+thumbs.forEach(thumb => {
 
-        document.getElementById("mainImage").src = image.src;
+    thumb.addEventListener("click", () => {
 
-        document.querySelectorAll(".thumb")
-            .forEach(img => img.classList.remove("active"));
+        // Fade out
+        mainImage.classList.add("fade");
 
-        image.classList.add("active");
+        setTimeout(() => {
 
-    };
+            // Change image
+            mainImage.src = thumb.src;
+
+            // Fade in
+            mainImage.classList.remove("fade");
+
+        }, 150);
+
+        // Remove active class from all thumbnails
+        thumbs.forEach(img => {
+
+            img.classList.remove("active");
+
+        });
+
+        // Highlight selected thumbnail
+        thumb.classList.add("active");
+
+    });
 
 });
 /*==========================================
@@ -139,43 +185,47 @@ document.getElementById("addCartBtn").addEventListener("click", () => {
             WISHLIST
 ==========================================*/
 
-document.getElementById("wishlistBtn").addEventListener("click", () => {
+const wishBtn = document.getElementById("wishlistBtn");
+
+wishBtn.onclick = () => {
 
     let wishlist =
+        JSON.parse(localStorage.getItem("wishlist")) || [];
 
-        JSON.parse(localStorage.getItem("wishlist"))
-
-    ||
-
-    [];
-
-    const exists =
-
-        wishlist.find(item => item.id === currentProduct.id);
+    const exists = wishlist.find(
+        item => item.id === currentProduct.id
+    );
 
     if (exists) {
 
-        showToast("Already in Wishlist ❤️");
+        wishlist = wishlist.filter(
+            item => item.id !== currentProduct.id
+        );
 
-        return;
+        wishBtn.innerHTML =
+            `<i class="fa-solid fa-heart"></i> Wishlist`;
+
+        showToast("Removed from Wishlist ❤️");
+
+    } else {
+
+        wishlist.push(currentProduct);
+
+        wishBtn.innerHTML =
+            `<i class="fa-solid fa-heart"></i> Wishlisted`;
+
+        showToast("Added to Wishlist ❤️");
 
     }
 
-    wishlist.push(currentProduct);
-
     localStorage.setItem(
-
         "wishlist",
-
         JSON.stringify(wishlist)
-
     );
 
     updateWishlistCount();
 
-    showToast("Added to Wishlist ❤️");
-
-});
+};
 /*==========================================
             BUY NOW
 ==========================================*/
@@ -373,8 +423,7 @@ function loadRelatedProducts(products) {
 
             grid.innerHTML += `
 
-            <div class="product-card"
-                 onclick="window.location='product.html?id=${product.id}'">
+            <div class="product-card" onclick="window.location='product.html?id=${product.id}'">
 
                 <img src="${product.image}">
 
@@ -397,3 +446,33 @@ function loadRelatedProducts(products) {
         });
 
 }
+document.querySelectorAll(".color")
+
+.forEach(btn => {
+
+    btn.onclick = () => {
+
+        document.querySelectorAll(".color")
+
+        .forEach(c => c.classList.remove("active"));
+
+        btn.classList.add("active");
+
+    };
+
+});
+document.querySelectorAll(".size")
+
+.forEach(btn => {
+
+    btn.onclick = () => {
+
+        document.querySelectorAll(".size")
+
+        .forEach(s => s.classList.remove("active"));
+
+        btn.classList.add("active");
+
+    };
+
+});

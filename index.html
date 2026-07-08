@@ -15,8 +15,8 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="js/products.js"></script>
-    <script src="js/app.js"></script>
+    <link rel="icon" href="images/favicon.png">
+    <meta name="description" content="DeepKart - Modern Online Shopping Website">
 </head>
 
 <body>
@@ -31,24 +31,26 @@
 
     <header>
 
-        <div class="logo">
+        <a href="index.html" class="logo">
+
             <i class="fa-solid fa-cart-shopping"></i>
+
             <h2>DeepKart</h2>
-        </div>
+
+        </a>
 
         <div class="search-box">
 
-            <input type="text" placeholder="Search for Mobiles, Laptops, Shoes...">
-
+            <input id="homeSearch" type="text" placeholder="Search for Mobiles, Laptops, Shoes...">
             <button>
-<i class="fa-solid fa-magnifying-glass"></i>
-</button>
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
 
         </div>
 
         <div class="header-icons">
 
-            <<div class="icon-btn">
+            <a href="wishlist.html" class="icon-btn">
 
                 <i class="fa-regular fa-heart"></i>
 
@@ -56,53 +58,53 @@
 
                 <div class="wishlist-count">0</div>
 
-        </div>
+            </a>
 
-        <div class="icon-btn">
+            <a href="cart.html" class="icon-btn">
 
-            <i class="fa-solid fa-cart-shopping"></i>
+                <i class="fa-solid fa-cart-shopping"></i>
 
-            <span>Cart</span>
+                <span>Cart</span>
 
-            <div class="cart-count">0</div>
+                <div class="cart-count">0</div>
 
-        </div>
+            </a>
 
-        <div class="profile">
+            <div class="profile">
 
-            <button id="profileBtn">
+                <button id="profileBtn">
                 <i class="fa-solid fa-user"></i>
             </button>
 
-            <div class="dropdown">
+                <div class="dropdown">
 
-                <a href="login.html">
-                    <i class="fa-solid fa-right-to-bracket"></i> Login
-                </a>
+                    <a href="login.html">
+                        <i class="fa-solid fa-right-to-bracket"></i> Login
+                    </a>
 
-                <a href="signup.html">
-                    <i class="fa-solid fa-user-plus"></i> Sign Up
-                </a>
+                    <a href="signup.html">
+                        <i class="fa-solid fa-user-plus"></i> Sign Up
+                    </a>
 
-                <a href="#">
-                    <i class="fa-solid fa-user"></i> My Profile
-                </a>
+                    <a href="profile.html">
+                        <i class="fa-solid fa-user"></i> My Profile
+                    </a>
 
-                <a href="#">
-                    <i class="fa-solid fa-box"></i> Orders
-                </a>
+                    <a href="orders.html">
+                        <i class="fa-solid fa-box"></i> Orders
+                    </a>
 
-                <a href="#">
-                    <i class="fa-solid fa-heart"></i> Wishlist
-                </a>
+                    <a href="wishlist.html">
+                        <i class="fa-solid fa-heart"></i> Wishlist
+                    </a>
 
-                <a href="#">
-                    <i class="fa-solid fa-right-from-bracket"></i> Logout
-                </a>
+                    <a href="#" id="logoutBtn">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </a>
+
+                </div>
 
             </div>
-
-        </div>
 
         </div>
 
@@ -116,23 +118,23 @@
 
             <li><a href="#">Home</a></li>
 
-            <li><a href="#">Mobiles</a></li>
+            <li><a href="products.html?category=Mobiles">Mobiles</a></li>
 
-            <li><a href="#">Electronics</a></li>
+            <li><a href="products.html?category=Electronics">Electronics</a></li>
 
-            <li><a href="#">Fashion</a></li>
+            <li><a href="products.html?category=Fashion">Fashion</a></li>
 
-            <li><a href="#">Furniture</a></li>
+            <li><a href="products.html?category=Furniture">Furniture</a></li>
 
-            <li><a href="#">Beauty</a></li>
+            <li><a href="products.html?category=Beauty">Beauty</a></li>
 
-            <li><a href="#">Sports</a></li>
+            <li><a href="products.html?category=Sports">Sports</a></li>
 
-            <li><a href="#">Books</a></li>
+            <li><a href="products.html?category=Books">Books</a></li>
 
-            <li><a href="#">Groceries</a></li>
+            <li><a href="products.html?category=Groceries">Groceries</a></li>
 
-            <li><a href="#">Toys</a></li>
+            <li><a href="products.html?category=Toys">Toys</a></li>
 
         </ul>
 
@@ -150,7 +152,7 @@
                 Shop the latest collections with exciting offers.
             </p>
 
-            <button>Shop Now</button>
+            <button onclick="document.querySelector('.products').scrollIntoView({behavior:'smooth'})">Shop Now</button>
 
         </div>
 
@@ -170,15 +172,21 @@
 
         <div class="category-container">
 
-            <div class="category-card">
-                <i class="fa-solid fa-mobile-screen-button"></i>
-                <p>Mobiles</p>
-            </div>
+            <a href="products.html?category=Mobiles" class="category-card">
 
-            <div class="category-card">
-                <i class="fa-solid fa-laptop"></i>
+                <i class="fa-solid fa-mobile-screen-button"></i>
+
+                <p>Mobiles</p>
+
+            </a>
+
+            <a href="products.html?category=Laptops" class="category-card">
+
+                <i class="fa-solid fa-mobile-screen-button"></i>
+
                 <p>Laptops</p>
-            </div>
+
+            </a>
 
             <div class="category-card">
                 <i class="fa-solid fa-shirt"></i>
@@ -274,7 +282,7 @@
 
         <p>Up to 70% OFF on Electronics & Fashion</p>
 
-        <button>Explore Deals</button>
+        <button onclick="window.location.href='products.html'">Explore Deals</button>
 
     </section>
 
@@ -290,7 +298,11 @@
 
             <input type="email" placeholder="Enter your email">
 
-            <button>Subscribe</button>
+            <button id="subscribeBtn">
+
+Subscribe
+
+</button>
 
         </div>
 
@@ -316,10 +328,13 @@
 
                 <ul>
 
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Contact</li>
-                    <li>Privacy</li>
+                    <li><a href="index.html">Home</a></li>
+
+                    <li><a href="about.html">About</a></li>
+
+                    <li><a href="contact.html">Contact</a></li>
+
+                    <li><a href="privacy.html">Privacy</a></li>
 
                 </ul>
 
@@ -358,8 +373,8 @@
 
     </footer>
 
+    <script src="js/products.js"></script>
     <script src="js/app.js"></script>
-
 </body>
 
 </html>

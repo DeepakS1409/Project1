@@ -267,3 +267,103 @@ body {
     gap: 25px;
     margin-top: 25px;
 }
+
+
+/*==========================================
+            PRICE
+==========================================*/
+
+.price-section {
+    margin: 20px 0;
+}
+
+.current-price {
+    font-size: 38px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: #888;
+    margin-top: 8px;
+}
+
+.discount-tag {
+    color: #16a34a;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.saving {
+    color: #f97316;
+    margin-top: 8px;
+}
+
+
+/*==========================================
+            COLORS
+==========================================*/
+
+.color-options {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.color {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    cursor: pointer;
+}
+
+.color.active {
+    border-color: #2563eb;
+}
+
+
+/*==========================================
+            SIZES
+==========================================*/
+
+.size-options {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.size {
+    width: 60px;
+    height: 45px;
+    border: 2px solid #ddd;
+    background: white;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.size.active {
+    background: #2563eb;
+    color: white;
+}
+
+
+/*==========================================
+            IMAGE ZOOM
+==========================================*/
+
+.main-image {
+    overflow: hidden;
+    cursor: zoom-in;
+}
+
+.main-image img {
+    width: 100%;
+    border-radius: 15px;
+    transition: 0.3s ease;
+}
+
+.main-image img.fade {
+    opacity: 0.4;
+}
