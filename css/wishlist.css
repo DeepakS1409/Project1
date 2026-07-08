@@ -1,0 +1,18 @@
+body {
+    background: #f5f7fb;
+}
+
+.wishlist-page {
+    width: 90%;
+    margin: 40px auto;
+}
+
+.wishlist-page h1 {
+    margin-bottom: 30px;
+}
+
+#wishlistItems {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}

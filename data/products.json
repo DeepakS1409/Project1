@@ -1,0 +1,17 @@
+[{
+        "id": 1,
+        "name": "Samsung Galaxy S25",
+        "price": 79999,
+        "image": "images/product1.jpg",
+        "category": "Mobiles",
+        "rating": 4.8
+    },
+    {
+        "id": 2,
+        "name": "Apple MacBook Air M4",
+        "price": 99999,
+        "image": "images/product2.jpg",
+        "category": "Laptop",
+        "rating": 4.9
+    }
+]

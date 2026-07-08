@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shopping Cart | DeepKart</title>
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Main CSS -->
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Cart CSS -->
+
+    <link rel="stylesheet" href="css/cart.css">
+
+</head>
+
+<body>
+
+    <!--=========================
+        TOP BAR
+==========================-->
+
+    <div class="top-bar">
+
+        🚚 Free Shipping on Orders Above ₹999
+
+    </div>
+
+    <!--=========================
+        HEADER
+==========================-->
+
+    <header>
+
+        <div class="logo">
+
+            <i class="fa-solid fa-store"></i>
+
+            <h2>DeepKart</h2>
+
+        </div>
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+            <input type="text" placeholder="Search Products...">
+
+            <button>
+
+            <i class="fa-solid fa-search"></i>
+
+        </button>
+
+        </div>
+
+        <!-- Header Icons -->
+
+        <div class="header-icons">
+
+            <button id="themeToggle" class="theme-btn">
+
+            <i class="fa-solid fa-moon"></i>
+
+        </button>
+
+            <!-- Wishlist -->
+
+            <a href="wishlist.html" class="icon-btn">
+
+                <i class="fa-solid fa-heart"></i>
+
+                <span>Wishlist</span>
+
+                <span class="wishlist-count">0</span>
+
+            </a>
+
+            <!-- Cart -->
+
+            <a href="cart.html" class="icon-btn">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span>Cart</span>
+
+                <span class="cart-count">0</span>
+
+            </a>
+
+            <!-- Profile -->
+
+            <div class="profile">
+
+                <button id="profileBtn" class="icon-btn">
+
+                <i class="fa-solid fa-user"></i>
+
+                <span>Account</span>
+
+            </button>
+
+                <div class="dropdown">
+
+                    <a href="login.html">
+
+                        <i class="fa-solid fa-right-to-bracket"></i> Login
+
+                    </a>
+
+                    <a href="signup.html">
+
+                        <i class="fa-solid fa-user-plus"></i> Sign Up
+
+                    </a>
+
+                    <a href="profile.html">
+
+                        <i class="fa-solid fa-user"></i> My Profile
+
+                    </a>
+
+                    <a href="orders.html">
+
+                        <i class="fa-solid fa-box"></i> My Orders
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <!--=========================
+        NAVBAR
+==========================-->
+
+    <nav>
+
+        <ul>
+
+            <li><a href="index.html">Home</a></li>
+
+            <li><a href="#">Mobiles</a></li>
+
+            <li><a href="#">Laptops</a></li>
+
+            <li><a href="#">Electronics</a></li>
+
+            <li><a href="#">Fashion</a></li>
+
+            <li><a href="#">Furniture</a></li>
+
+            <li><a href="#">Sports</a></li>
+
+            <li><a href="#">Books</a></li>
+
+        </ul>
+
+    </nav>
+
+    <!--=========================
+        BREADCRUMB
+==========================-->
+
+    <section class="breadcrumb">
+
+        <a href="index.html">
+
+        Home
+
+    </a> /
+
+        <span>
+
+        Shopping Cart
+
+    </span>
+
+    </section>
+
+    <!--=========================
+        PAGE TITLE
+==========================-->
+
+    <section class="page-title">
+
+        <h1>
+
+            <i class="fa-solid fa-cart-shopping"></i> My Shopping Cart
+
+        </h1>
+
+        <p>
+
+            Review your products before checkout.
+
+        </p>
+
+    </section>
+
+    <!--=========================
+        CART CONTAINER
+==========================-->
+
+    <section class="cart-container">
+
+        <!-- LEFT -->
+
+        <div class="cart-left">
+
+            <div class="cart-header">
+
+                <h2>
+
+                    Shopping Cart
+
+                </h2>
+
+                <span id="itemCount">
+
+                0 Items
+
+            </span>
+
+            </div>
+
+            <!-- Cart items will come here -->
+
+            <div id="cartItems">
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <aside class="cart-right">
+
+            <div class="summary-card">
+
+                <h2>
+
+                    Order Summary
+
+                </h2>
+
+                <div class="summary-row">
+
+                    <span>
+
+                    Items
+
+                </span>
+
+                    <span id="summaryItems">
+
+                    0
+
+                </span>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <span>
+
+                    Total Price
+
+                </span>
+
+                    <span id="totalPrice">
+
+                    ₹0
+
+                </span>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <span>
+
+                    Delivery
+
+                </span>
+
+                    <span class="free">
+
+                    FREE
+
+                </span>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <span>
+
+                    GST
+
+                </span>
+
+                    <span id="gst">
+
+                    ₹0
+
+                </span>
+
+                </div>
+
+                <div class="summary-row discount">
+
+                    <span>
+
+                    Discount
+
+                </span>
+
+                    <span id="discount">
+
+                    -₹0
+
+                </span>
+
+                </div>
+
+                <hr>
+
+                <div class="grand-total">
+
+                    <span>
+
+                    Grand Total
+
+                </span>
+
+                    <span id="grandTotal">
+
+                    ₹0
+
+                </span>
+
+                </div>
+
+                <button id="checkoutBtn">
+
+                <i class="fa-solid fa-credit-card"></i>
+
+                Proceed to Checkout
+
+                </button>
+
+                <a href="index.html" class="continue-btn">
+
+                    <i class="fa-solid fa-arrow-left"></i> Continue Shopping
+
+                </a>
+                <div class="secure-payment">
+
+                    <h4>Secure Payment</h4>
+
+                    <div class="payment-icons">
+
+                        <i class="fa-brands fa-cc-visa"></i>
+
+                        <i class="fa-brands fa-cc-mastercard"></i>
+
+                        <i class="fa-brands fa-google-pay"></i>
+
+                        <i class="fa-brands fa-paypal"></i>
+
+                    </div>
+
+                </div>
+
+                <div class="trust-box">
+
+                    <h4>
+
+                        <i class="fa-solid fa-shield-halved"></i> Safe Checkout
+
+                    </h4>
+
+                    <p>
+
+                        Your payment information is encrypted and processed securely.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+    </section>
+
+    <!-- Part 2 will continue from here -->
+
+    <script src="js/cart.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

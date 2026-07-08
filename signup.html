@@ -1,0 +1,200 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | DeepKart</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/signup.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="signup-container">
+
+        <!-- Left Section -->
+        <div class="signup-left">
+
+            <div class="brand">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <h1>DeepKart</h1>
+            </div>
+
+            <h2>Join DeepKart 🛍️</h2>
+
+            <p>
+                Create your account and enjoy secure shopping, exclusive offers, order tracking, and wishlist features.
+            </p>
+
+            <img src="images/signup-banner.png" alt="Signup Illustration">
+
+        </div>
+
+        <!-- Right Section -->
+        <div class="signup-right">
+
+            <form id="signupForm">
+
+                <h2>Create Account</h2>
+
+                <p class="subtitle">
+                    Fill in your details to get started.
+                </p>
+
+                <!-- Full Name -->
+                <div class="input-group">
+
+                    <label>Full Name</label>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-user"></i>
+
+                        <input type="text" id="fullname" placeholder="Enter your full name" required>
+
+                    </div>
+
+                </div>
+
+                <!-- Email -->
+                <div class="input-group">
+
+                    <label>Email Address</label>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <input type="email" id="email" placeholder="Enter your email" required>
+
+                    </div>
+
+                </div>
+
+                <!-- Phone -->
+                <div class="input-group">
+
+                    <label>Phone Number</label>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-phone"></i>
+
+                        <input type="tel" id="phone" placeholder="Enter your mobile number" maxlength="10" required>
+
+                    </div>
+
+                </div>
+
+                <!-- Password -->
+                <div class="input-group">
+
+                    <label>Password</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input type="password" id="password" placeholder="Create a password" required>
+
+                        <button type="button" id="togglePassword" class="toggle-password">
+
+                        <i class="fa-solid fa-eye"></i>
+
+                    </button>
+
+                    </div>
+
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="input-group">
+
+                    <label>Confirm Password</label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input type="password" id="confirmPassword" placeholder="Confirm password" required>
+
+                        <button type="button" id="toggleConfirmPassword" class="toggle-password">
+
+                        <i class="fa-solid fa-eye"></i>
+
+                    </button>
+
+                    </div>
+
+                </div>
+
+                <!-- Terms -->
+                <div class="options">
+
+                    <label class="remember">
+
+                    <input type="checkbox" required>
+
+                    I agree to the
+                    <a href="#">Terms & Conditions</a>
+
+                </label>
+
+                </div>
+
+                <!-- Signup Button -->
+                <button class="signup-btn" type="submit">
+                Create Account
+            </button>
+
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+
+                <!-- Social Signup -->
+                <div class="social-login">
+
+                    <button type="button" class="google-btn">
+                    <i class="fab fa-google"></i>
+                    Continue with Google
+                </button>
+
+                    <button type="button" class="facebook-btn">
+                    <i class="fab fa-facebook-f"></i>
+                    Continue with Facebook
+                </button>
+
+                </div>
+
+                <p class="login-text">
+
+                    Already have an account?
+
+                    <a href="login.html">
+                    Login
+                </a>
+
+                </p>
+
+                <a class="back-home" href="index.html">
+                ← Back to Home
+            </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="js/auth.js"></script>
+
+</body>
+
+</html>
+```
