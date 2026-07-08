@@ -47,6 +47,34 @@ function createCheckoutCard(product) {
     `;
 
 }
+
+function loadCheckout() {
+
+    const container = document.getElementById("checkoutItems");
+
+    container.innerHTML = "";
+
+    if (cart.length === 0) {
+
+        container.innerHTML = `
+            <h3>Your Cart is Empty</h3>
+        `;
+
+        updateSummary();
+
+        return;
+    }
+
+    cart.forEach(product => {
+
+        container.innerHTML += createCheckoutCard(product);
+
+    });
+
+    updateSummary();
+
+}
+
 /*==========================================
         ORDER SUMMARY
 ==========================================*/
@@ -69,7 +97,11 @@ function updateSummary() {
 
     const discount = totalPrice * 0.05 + couponDiscount;
 
-    const grandTotal = totalPrice + gst - discount;
+    let grandTotal = totalPrice + gst - discount;
+
+    if (grandTotal < 0) {
+        grandTotal = 0;
+    }
 
     document.getElementById("itemCount").innerHTML = totalItems;
 
@@ -125,7 +157,7 @@ function showToast(message) {
 
     toast.className = "toast";
 
-    toast.innerHTML = message;
+    toast.textContent = message;
 
     document.body.appendChild(toast);
 

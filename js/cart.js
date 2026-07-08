@@ -51,7 +51,7 @@ function createCartCard(product) {
 
     <div class="cart-item">
 
-        <img src="${product.image}" alt="${product.name}">
+        <img src="${product.image}" alt="${product.name}" loading="lazy">
 
         <div class="cart-info">
 
@@ -202,16 +202,11 @@ function removeProduct(id) {
 
 function saveCart() {
 
-    localStorage.setItem(
+    localStorage.setItem("cart", JSON.stringify(cart));
 
-        "cart",
-
-        JSON.stringify(cart)
-
-    );
+    cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     loadCart();
-
     updateCartBadge();
 
 }
@@ -239,15 +234,12 @@ function updateSummary() {
 
     const discount = totalPrice * 0.05;
 
-    const grandTotal =
-
-        totalPrice + gst - discount;
+    const grandTotal = Math.round(totalPrice + gst - discount);
 
     document.getElementById("summaryItems").innerHTML = totalItems;
 
-    document.getElementById("itemCount").innerHTML =
-
-        totalItems + " Items";
+    document.getElementById("itemCount").textContent =
+        totalItems + (totalItems === 1 ? " Item" : " Items");
 
     document.getElementById("totalPrice").innerHTML =
 
@@ -286,4 +278,21 @@ function updateCartBadge() {
 
     badge.innerHTML = total;
 
+}
+/*==========================================
+            CHECKOUT
+==========================================*/
+
+const checkoutBtn = document.getElementById("checkoutBtn");
+
+if (checkoutBtn) {
+    checkoutBtn.addEventListener("click", () => {
+
+        if (cart.length === 0) {
+            alert("Your cart is empty.");
+            return;
+        }
+
+        window.location.href = "checkout.html";
+    });
 }

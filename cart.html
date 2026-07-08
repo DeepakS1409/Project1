@@ -21,6 +21,8 @@
 
     <link rel="stylesheet" href="css/cart.css">
 
+    <link rel="icon" href="images/favicon.png">
+
 </head>
 
 <body>
@@ -41,19 +43,16 @@
 
     <header>
 
-        <div class="logo">
-
+        <a href="index.html" class="logo">
             <i class="fa-solid fa-store"></i>
-
             <h2>DeepKart</h2>
-
-        </div>
+        </a>
 
         <!-- Search -->
 
         <div class="search-box">
 
-            <input type="text" placeholder="Search Products...">
+            <input id="homeSearch" type="text" placeholder="Search Products...">
 
             <button>
 
@@ -132,6 +131,11 @@
                     <a href="orders.html">
 
                         <i class="fa-solid fa-box"></i> My Orders
+
+                    </a>
+                    <a href="#" id="logoutBtn">
+
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
 
                     </a>
 
@@ -410,8 +414,8 @@
 
     <!-- Part 2 will continue from here -->
 
-    <script src="js/cart.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/cart.js"></script>
 
 </body>
 
