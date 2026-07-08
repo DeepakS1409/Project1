@@ -23,6 +23,7 @@ document.getElementById("minusBtn").onclick = () => {
     }
 
 };
+let currentProduct;
 
 async function loadProduct() {
 
@@ -30,28 +31,57 @@ async function loadProduct() {
 
     const products = await response.json();
 
-    const product = products.find(p => p.id === productId);
+    currentProduct = products.find(
+        p => p.id == productId
+    );
 
-    if (!product) {
+    if (!currentProduct) {
 
-        document.body.innerHTML = "<h1>Product Not Found</h1>";
+        document.body.innerHTML = "Product Not Found";
 
         return;
 
     }
 
-    document.getElementById("mainImage").src = product.image;
+    mainImage.src = currentProduct.image;
 
-    document.getElementById("category").textContent = product.category;
+    thumb1.src = currentProduct.image;
 
-    document.getElementById("productName").textContent = product.name;
+    thumb2.src = currentProduct.image;
 
-    document.getElementById("rating").textContent = "⭐ " + product.rating;
+    thumb3.src = currentProduct.image;
 
-    document.getElementById("price").textContent = "₹" + product.price.toLocaleString();
+    thumb4.src = currentProduct.image;
 
-    document.getElementById("description").textContent = product.description;
+    category.innerHTML = currentProduct.category;
+
+    productName.innerHTML = currentProduct.name;
+
+    rating.innerHTML = currentProduct.rating;
+
+    price.innerHTML = currentProduct.price.toLocaleString();
+
+    stock.innerHTML = currentProduct.stock;
+
+    description.innerHTML = currentProduct.description;
 
 }
 
+// Call the function
 loadProduct();
+
+// Thumbnail click event (OUTSIDE loadProduct)
+document.querySelectorAll(".thumb").forEach(image => {
+
+    image.onclick = () => {
+
+        document.getElementById("mainImage").src = image.src;
+
+        document.querySelectorAll(".thumb")
+            .forEach(img => img.classList.remove("active"));
+
+        image.classList.add("active");
+
+    };
+
+});

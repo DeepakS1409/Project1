@@ -13,5 +13,20 @@
         "image": "images/product2.jpg",
         "category": "Laptop",
         "rating": 4.9
+    },
+    {
+        "id": 1,
+        "name": "iPhone 16",
+        "price": 79999,
+        "category": "Mobiles",
+        "rating": 4.8,
+        "stock": 25,
+        "description": "Latest Apple iPhone with A18 chip.",
+        "images": [
+            "images/products/iphone16-1.jpg",
+            "images/products/iphone16-2.jpg",
+            "images/products/iphone16-3.jpg",
+            "images/products/iphone16-4.jpg"
+        ]
     }
 ]

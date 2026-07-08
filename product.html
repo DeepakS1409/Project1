@@ -64,11 +64,31 @@
 
     <section class="product-page">
 
+        <!-- LEFT SIDE -->
+
         <div class="product-gallery">
 
-            <img id="mainImage" src="" alt="Product">
+            <div class="thumbnail-list">
+
+                <img id="thumb1" class="thumb active">
+
+                <img id="thumb2" class="thumb">
+
+                <img id="thumb3" class="thumb">
+
+                <img id="thumb4" class="thumb">
+
+            </div>
+
+            <div class="main-image">
+
+                <img id="mainImage">
+
+            </div>
 
         </div>
+
+        <!-- RIGHT SIDE -->
 
         <div class="product-details">
 
@@ -76,19 +96,65 @@
 
             <h1 id="productName"></h1>
 
-            <div id="rating" class="rating"></div>
+            <div class="rating">
 
-            <div id="price" class="price"></div>
+                ⭐⭐⭐⭐⭐
+
+                <span id="rating"></span>
+
+            </div>
+
+            <div class="price">
+
+                ₹<span id="price"></span>
+
+            </div>
+
+            <div class="stock">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span id="stock"></span>
+
+            </div>
+
+            <div class="delivery">
+
+                <i class="fa-solid fa-truck-fast"></i> Free Delivery
+
+            </div>
+
+            <div class="replace">
+
+                <i class="fa-solid fa-rotate-left"></i> 7 Days Replacement
+
+            </div>
+
+            <hr>
+
+            <h3>Description</h3>
 
             <p id="description"></p>
 
+            <hr>
+
+            <h3>Quantity</h3>
+
             <div class="quantity-box">
 
-                <button id="minusBtn">-</button>
+                <button id="minusBtn">
 
-                <input id="quantity" type="number" value="1" min="1">
+                -
 
-                <button id="plusBtn">+</button>
+            </button>
+
+                <input id="quantity" value="1" readonly>
+
+                <button id="plusBtn">
+
+                +
+
+            </button>
 
             </div>
 
@@ -99,6 +165,14 @@
                 <i class="fa-solid fa-cart-shopping"></i>
 
                 Add To Cart
+
+            </button>
+
+                <button id="wishlistBtn" class="wish-btn">
+
+                <i class="fa-solid fa-heart"></i>
+
+                Wishlist
 
             </button>
 
@@ -113,7 +187,6 @@
         </div>
 
     </section>
-
     <script src="js/product.js"></script>
 
 </body>
