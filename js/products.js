@@ -55,20 +55,6 @@ async function loadProducts() {
             DISPLAY PRODUCTS
 ================================================*/
 
-function displayProducts(productArray) {
-
-    const productGrid = document.getElementById("productGrid");
-
-    productGrid.innerHTML = "";
-
-    productArray.forEach(product => {
-
-        productGrid.innerHTML += createCard(product);
-
-    });
-
-}
-
 /*===============================================
             PRODUCT CARD
 ================================================*/
