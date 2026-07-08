@@ -2,7 +2,15 @@ const params = new URLSearchParams(window.location.search);
 
 const productId = Number(params.get("id"));
 
+const thumbs = document.querySelectorAll(".thumb");
+
 const mainImage = document.getElementById("mainImage");
+
+const thumb1 = document.getElementById("thumb1");
+const thumb2 = document.getElementById("thumb2");
+const thumb3 = document.getElementById("thumb3");
+const thumb4 = document.getElementById("thumb4");
+const thumbs = document.querySelectorAll(".thumb");
 
 let quantity = 1;
 
@@ -59,6 +67,11 @@ async function loadProduct() {
     const images = currentProduct.images || [currentProduct.image];
 
     mainImage.src = images[0];
+    thumbs.forEach(img => img.classList.remove("active"));
+
+    if (thumbs.length > 0) {
+        thumbs[0].classList.add("active");
+    }
 
     thumb1.src = images[0] || "";
 
@@ -68,7 +81,7 @@ async function loadProduct() {
 
     thumb4.src = images[3] || images[0];
 
-    category.innerHTML = currentProduct.category;
+    category.textContent = currentProduct.category;
 
     productName.innerHTML = currentProduct.name;
 
@@ -110,7 +123,6 @@ async function loadProduct() {
 loadProduct();
 
 // Thumbnail click event (OUTSIDE loadProduct)
-const thumbs = document.querySelectorAll(".thumb");
 
 thumbs.forEach(thumb => {
 
@@ -313,7 +325,7 @@ function showToast(message) {
 
     toast.className = "toast";
 
-    toast.innerHTML = message;
+    toast.textContent = message;
 
     document.body.appendChild(toast);
 
@@ -346,7 +358,7 @@ document.getElementById("checkDelivery").onclick = () => {
 
     const result = document.getElementById("deliveryResult");
 
-    if (pin.length === 6) {
+    if (/^[0-9]{6}$/.test(pin)) {
 
         result.innerHTML = "✅ Delivery Available in 2-3 Days";
 
@@ -418,6 +430,10 @@ function loadRelatedProducts(products) {
 
     products
         .filter(item => item.id !== currentProduct.id)
+        .filter(item =>
+            item.category === currentProduct.category &&
+            item.id !== currentProduct.id
+        )
         .slice(0, 4)
         .forEach(product => {
 
@@ -476,3 +492,5 @@ document.querySelectorAll(".size")
     };
 
 });
+updateCartCount();
+updateWishlistCount();

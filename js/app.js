@@ -23,15 +23,8 @@ function initializeApp() {
 
     navbarScroll();
 
-    productButtons();
-
-    updateBadges();
-
     heroSlider();
 
-    liveSearch();
-
-    wishlist();
 
 }
 
@@ -58,12 +51,11 @@ function profileDropdown() {
     document.addEventListener("click", (e) => {
 
         if (!dropdown.contains(e.target) &&
-            e.target !== profileBtn) {
+            !profileBtn.contains(e.target)) {
 
             dropdown.classList.remove("active");
 
         }
-
     });
 
 }
@@ -155,54 +147,7 @@ function navbarScroll() {
 
 }
 
-/*===========================================
-        PRODUCT BUTTONS
-===========================================*/
 
-function productButtons() {
-
-    const buttons = document.querySelectorAll(".product-card button");
-
-    buttons.forEach((btn) => {
-
-        btn.addEventListener("click", () => {
-
-            btn.innerHTML = "✔ Added";
-
-            btn.style.background = "#16a34a";
-
-            btn.disabled = true;
-
-            let cart = parseInt(localStorage.getItem("cart")) || 0;
-
-            cart++;
-
-            localStorage.setItem("cart", cart);
-
-            updateBadges();
-
-        });
-
-    });
-
-}
-
-/*===========================================
-        BADGES
-===========================================*/
-
-function updateBadges() {
-
-    const cart = document.querySelector(".cart-count");
-
-    if (cart) {
-
-        cart.innerHTML =
-            localStorage.getItem("cart") || 0;
-
-    }
-
-}
 
 /*===========================================
         SCROLL TO TOP
@@ -247,7 +192,7 @@ scrollBtn.onclick = () => {
         PRELOADER
 ===========================================*/
 
-window.onload = () => {
+window.addEventListener("load", () => {
 
     const loader = document.querySelector(".loader");
 
@@ -263,7 +208,7 @@ window.onload = () => {
 
     }
 
-}
+});
 
 /*===========================================
         CONSOLE
@@ -314,87 +259,7 @@ function heroSlider() {
 
 }
 
-heroSlider();
 
-/*===========================================
-        LIVE PRODUCT SEARCH
-===========================================*/
-
-function liveSearch() {
-
-    const searchInput = document.querySelector(".search-box input");
-
-    const cards = document.querySelectorAll(".product-card");
-
-    if (!searchInput) return;
-
-    searchInput.addEventListener("keyup", () => {
-
-        const value = searchInput.value.toLowerCase();
-
-        cards.forEach(card => {
-
-            const title = card.querySelector("h3").innerText.toLowerCase();
-
-            if (title.includes(value)) {
-
-                card.style.display = "block";
-
-            } else {
-
-                card.style.display = "none";
-
-            }
-
-        });
-
-    });
-
-}
-
-liveSearch();
-
-/*===========================================
-        WISHLIST
-===========================================*/
-
-function wishlist() {
-
-    const cards = document.querySelectorAll(".product-card");
-
-    let wish = parseInt(localStorage.getItem("wishlist")) || 0;
-
-    cards.forEach(card => {
-
-        let heart = document.createElement("button");
-
-        heart.innerHTML = '<i class="fa-solid fa-heart"></i>';
-
-        heart.className = "wishlist-btn";
-
-        card.appendChild(heart);
-
-        heart.addEventListener("click", () => {
-
-            if (!heart.classList.contains("added")) {
-
-                heart.classList.add("added");
-
-                wish++;
-
-                localStorage.setItem("wishlist", wish);
-
-                showToast("Added to Wishlist ❤️");
-
-            }
-
-        });
-
-    });
-
-}
-
-wishlist();
 
 /*===========================================
         TOAST NOTIFICATION
@@ -406,7 +271,7 @@ function showToast(message) {
 
     toast.className = "toast";
 
-    toast.innerHTML = message;
+    toast.textContent = message;
 
     document.body.appendChild(toast);
 
