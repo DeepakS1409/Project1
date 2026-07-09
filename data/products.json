@@ -20,9 +20,15 @@
         "id": 2,
         "name": "Apple MacBook Air M4",
         "price": 99999,
-        "image": "images/product2.jpg",
+        "image": "images/products/AppleMacBookAirM4.jpg",
         "category": "Laptop",
-        "rating": 4.9
+        "rating": 4.9,
+        "images": [
+            "images/products/AppleMacBookAirM4-1.png",
+            "images/products/AppleMacBookAirM4-2.webp",
+            "images/products/AppleMacBookAirM4-3.webp",
+            "images/products/AppleMacBookAirM4-4.jpg"
+        ]
     },
     {
         "id": 3,
