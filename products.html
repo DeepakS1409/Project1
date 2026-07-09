@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Products | DeepKart</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/products.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!--================ TOP BAR ================-->
+
+    <div class="top-bar">
+        <p>🔥 Welcome to DeepKart | Free Shipping Above ₹999</p>
+    </div>
+
+    <!--================ HEADER ================-->
+
+    <header>
+
+        <a href="index.html" class="logo">
+
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            <h2>DeepKart</h2>
+
+        </a>
+
+        <div class="search-box">
+
+            <input type="text" id="searchProduct" placeholder="Search Products...">
+
+            <button>
+
+                <i class="fa-solid fa-search"></i>
+
+            </button>
+
+        </div>
+
+        <div class="header-icons">
+
+            <a href="wishlist.html" class="icon-btn">
+
+                <i class="fa-regular fa-heart"></i>
+
+                <span>Wishlist</span>
+
+                <div class="wishlist-count">0</div>
+
+            </a>
+
+            <a href="cart.html" class="icon-btn">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span>Cart</span>
+
+                <div class="cart-count">0</div>
+
+            </a>
+
+        </div>
+
+    </header>
+
+    <!--================ BREADCRUMB ================-->
+
+    <section class="breadcrumb">
+
+        <a href="index.html">Home</a>
+
+        <i class="fa-solid fa-angle-right"></i>
+
+        <span id="breadcrumbCategory">
+
+            Products
+
+        </span>
+
+    </section>
+
+    <!--================ PAGE HEADER ================-->
+
+    <section class="page-heading">
+
+        <h1 id="pageTitle">
+
+            Products
+
+        </h1>
+
+        <p>
+
+            <span id="productCount">
+
+                0
+
+            </span> Products Found
+
+        </p>
+
+    </section>
+
+    <!--================ FILTER BAR ================-->
+
+    <section class="toolbar">
+
+        <select id="sortProducts">
+
+            <option value="default">
+
+                Sort By
+
+            </option>
+
+            <option value="low">
+
+                Price : Low to High
+
+            </option>
+
+            <option value="high">
+
+                Price : High to Low
+
+            </option>
+
+            <option value="rating">
+
+                Highest Rating
+
+            </option>
+
+        </select>
+
+        <button id="resetFilters">
+
+            Reset
+
+        </button>
+
+    </section>
+
+    <!--================ PRODUCTS ================-->
+
+    <section class="products-section">
+
+        <div class="product-grid" id="productGrid">
+
+            <!-- Products will come here -->
+
+        </div>
+
+    </section>
+
+    <!--================ FOOTER ================-->
+
+    <footer>
+
+        <div class="footer-container">
+
+            <div>
+
+                <h3>DeepKart</h3>
+
+                <p>
+
+                    Your trusted online shopping destination.
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3>Quick Links</h3>
+
+                <ul>
+
+                    <li>
+
+                        <a href="index.html">
+
+                            Home
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="contact.html">
+
+                            Contact
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="privacy.html">
+
+                            Privacy
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div>
+
+                <h3>Follow Us</h3>
+
+                <i class="fab fa-facebook"></i>
+
+                <i class="fab fa-instagram"></i>
+
+                <i class="fab fa-twitter"></i>
+
+                <i class="fab fa-linkedin"></i>
+
+            </div>
+
+        </div>
+
+        <p class="copyright">
+
+            © 2026 DeepKart. All Rights Reserved.
+
+        </p>
+
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/products-page.js"></script>
+
+</body>
+
+</html>

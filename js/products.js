@@ -6,6 +6,10 @@
 let products = [];
 let filteredProducts = [];
 
+const urlParams = new URLSearchParams(window.location.search);
+
+const selectedCategory = urlParams.get("category");
+
 /*===============================================
             LOAD PRODUCTS
 ================================================*/
@@ -29,7 +33,26 @@ async function loadProducts() {
 
         products = await response.json();
 
-        filteredProducts = [...products];
+        if (selectedCategory) {
+
+            filteredProducts = products.filter(product =>
+                product.category.toLowerCase() ===
+                selectedCategory.toLowerCase()
+            );
+
+            const title = document.getElementById("pageTitle");
+            const count = document.getElementById("productCount");
+            const breadcrumb = document.getElementById("breadcrumbCategory");
+
+            if (title) title.textContent = selectedCategory;
+            if (count) count.textContent = filteredProducts.length;
+            if (breadcrumb) breadcrumb.textContent = selectedCategory;
+
+        } else {
+
+            filteredProducts = [...products];
+
+        }
 
         displayProducts(filteredProducts);
         updateCartCount();
