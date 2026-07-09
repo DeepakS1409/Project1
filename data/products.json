@@ -2,7 +2,7 @@
         "id": 1,
         "name": "iPhone 16",
         "images": [
-            "../images/products/iphone16-1.jpg",
+            "images/products/iphone16-1.jpg",
             "images/products/iphone16-2.png",
             "images/products/iphone16-3.jpg",
             "images/products/iphone16-4.webp"
@@ -40,7 +40,7 @@
         "description": "Latest Apple iPhone with A18 chip.",
         "image": "images/products/iphone16-1.jpg",
         "images": [
-            "../images/products/iphone16-1.jpg",
+            "images/products/iphone16-1.jpg",
             "images/products/iphone16-2.png",
             "images/products/iphone16-3.jpg",
             "images/products/iphone16-4.webp"

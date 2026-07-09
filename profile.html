@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | DeepKart</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+    <header>
+
+        <h1>DeepKart</h1>
+
+        <a href="index.html">
+            <i class="fa-solid fa-house"></i> Home
+        </a>
+
+    </header>
+
+
+
+    <section class="profile-container">
+
+
+        <div class="profile-card">
+
+
+            <div class="profile-image">
+
+                <i class="fa-solid fa-user"></i>
+
+            </div>
+
+
+            <h2 id="profileName">
+                User Name
+            </h2>
+
+
+            <p id="profileEmail">
+                email@gmail.com
+            </p>
+
+
+
+        </div>
+
+
+
+        <div class="profile-details">
+
+
+            <h2>
+                Account Details
+            </h2>
+
+
+            <div class="detail">
+
+                <span>Name</span>
+                <p id="name"></p>
+
+            </div>
+
+
+            <div class="detail">
+
+                <span>Email</span>
+                <p id="email"></p>
+
+            </div>
+
+
+
+            <div class="detail">
+
+                <span>Phone</span>
+                <p id="phone"></p>
+
+            </div>
+
+
+
+            <div class="profile-buttons">
+
+
+                <button onclick="goOrders()">
+
+                <i class="fa-solid fa-box"></i>
+                My Orders
+
+            </button>
+
+
+
+                <button onclick="logout()">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+
+            </button>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <script src="js/profile.js"></script>
+
+
+</body>
+
+</html>

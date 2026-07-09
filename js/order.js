@@ -1,42 +1,69 @@
+/*==================================================
+                DEEPKART
+                ORDERS PAGE
+==================================================*/
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+let filteredOrders = [...orders];
+
+/*==========================================
+            PAGE LOAD
+==========================================*/
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    loadOrders();
+
+    updateStatistics();
+
+    initializeSearch();
+
+    initializeFilters();
+
+});
+
 /*==========================================
             LOAD ORDERS
 ==========================================*/
 
-let orders =
-
-    JSON.parse(localStorage.getItem("orders"))
-
-||
-
-[];
-
-displayOrders(orders);
-
-function displayOrders(orderList) {
+function loadOrders() {
 
     const container = document.getElementById("ordersList");
 
     container.innerHTML = "";
 
-    if (orderList.length === 0) {
+    if (filteredOrders.length === 0) {
 
         container.innerHTML = `
 
-<h2>No Orders Yet</h2>
+        <div class="empty-orders">
 
-<a href="index.html">
+            <i class="fa-solid fa-box-open"></i>
 
-Continue Shopping
+            <h2>No Orders Yet</h2>
 
-</a>
+            <p>
 
-`;
+                Looks like you haven't placed any orders.
+
+            </p>
+
+            <a href="index.html">
+
+                Continue Shopping
+
+            </a>
+
+        </div>
+
+        `;
 
         return;
 
     }
 
-    orderList.forEach(order => {
+    filteredOrders.forEach(order => {
 
         container.innerHTML += createOrderCard(order);
 
@@ -44,143 +71,374 @@ Continue Shopping
 
 }
 
+/*==========================================
+            CREATE CARD
+==========================================*/
+
 function createOrderCard(order) {
 
-    let productsHTML = "";
+    const firstProduct = order.items[0];
 
-    order.items.forEach(product => {
-
-        productsHTML += `
-
-<div class="product-row">
-
-<img src="${product.image}">
-
-<div>
-
-<h3>${product.name}</h3>
-
-<p>
-
-Qty : ${product.quantity}
-
-</p>
-
-</div>
-
-</div>
-
-`;
-
-    });
+    const status = order.status || "Delivered";
 
     return `
 
 <div class="order-card">
 
-<div class="order-top">
+    <div class="order-header">
 
-<div>
+        <div>
 
-<h3>
+            <div class="order-id">
 
-Order ID :
-${order.orderId}
+                Order #${order.orderId}
 
-</h3>
+            </div>
 
-<p>
+            <div class="order-date">
 
-${order.orderDate}
+                ${order.orderDate}
 
-</p>
+            </div>
 
-</div>
+        </div>
 
-<div>
+        <div class="order-status status-${status.toLowerCase()}">
 
-<h3>
+            ${status}
 
-${order.total}
+        </div>
 
-</h3>
+    </div>
 
-<p class="status">
+    <div class="order-body">
 
-Confirmed
+        <div class="order-product">
 
-</p>
+            <img src="${firstProduct.image}">
 
-</div>
+            <div class="product-details">
 
-</div>
+                <h3>
 
-<div class="order-items">
+                    ${firstProduct.name}
 
-${productsHTML}
+                </h3>
 
-</div>
+                <p>
 
-<button
+                    Quantity : ${firstProduct.quantity}
 
-class="cancel-btn"
+                </p>
 
-onclick="cancelOrder('${order.orderId}')">
+                <div class="product-price">
 
-Cancel Order
+                    ₹${firstProduct.price.toLocaleString()}
 
-</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="order-summary">
+
+            <div class="summary-row">
+
+                <span>Payment</span>
+
+                <span>${order.payment}</span>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>Total</span>
+
+                <span>${order.total}</span>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>Items</span>
+
+                <span>${order.items.length}</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="order-actions">
+
+        <button
+            class="track-btn"
+            onclick="trackOrder('${order.orderId}')">
+
+            <i class="fa-solid fa-truck-fast"></i>
+
+            Track Order
+
+        </button>
+
+        <button
+            class="details-btn"
+            onclick="viewDetails('${order.orderId}')">
+
+            <i class="fa-solid fa-eye"></i>
+
+            View Details
+
+        </button>
+
+        <button
+            class="buyagain-btn"
+            onclick="buyAgain('${order.orderId}')">
+
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            Buy Again
+
+        </button>
+
+    </div>
 
 </div>
 
 `;
 
 }
+
 /*==========================================
-            CANCEL ORDER
+            STATISTICS
 ==========================================*/
 
-function cancelOrder(id) {
+function updateStatistics() {
 
-    if (!confirm("Cancel this order?")) return;
+    document.getElementById("totalOrders").textContent = orders.length;
 
-    orders =
+    document.getElementById("deliveredOrders").textContent =
+        orders.filter(o => (o.status || "Delivered") === "Delivered").length;
 
-        orders.filter(order => order.orderId !== id);
+    document.getElementById("processingOrders").textContent =
+        orders.filter(o => o.status === "Processing").length;
 
-    localStorage.setItem(
-
-        "orders",
-
-        JSON.stringify(orders)
-
-    );
-
-    displayOrders(orders);
+    document.getElementById("cancelledOrders").textContent =
+        orders.filter(o => o.status === "Cancelled").length;
 
 }
 /*==========================================
-            SEARCH
+            SEARCH ORDERS
 ==========================================*/
 
-document.getElementById("searchOrder")
+function initializeSearch() {
 
-.addEventListener("input", function() {
+    const searchInput = document.getElementById("searchOrder");
 
-    const keyword = this.value.toLowerCase();
+    if (!searchInput) return;
 
-    const filtered =
+    searchInput.addEventListener("input", function() {
 
-        orders.filter(order =>
+        const value = this.value.trim().toLowerCase();
 
-            order.orderId
-
-            .toLowerCase()
-
-            .includes(keyword)
-
+        filteredOrders = orders.filter(order =>
+            order.orderId.toLowerCase().includes(value)
         );
 
-    displayOrders(filtered);
+        loadOrders();
 
-});
+    });
+
+}
+
+/*==========================================
+            FILTER BUTTONS
+==========================================*/
+
+function initializeFilters() {
+
+    const buttons = document.querySelectorAll(".filter-btn");
+
+    buttons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            buttons.forEach(btn => btn.classList.remove("active"));
+
+            button.classList.add("active");
+
+            const filter = button.textContent.trim();
+
+            if (filter === "All") {
+
+                filteredOrders = [...orders];
+
+            } else {
+
+                filteredOrders = orders.filter(order =>
+                    (order.status || "Delivered") === filter
+                );
+
+            }
+
+            loadOrders();
+
+        });
+
+    });
+
+}
+
+/*==========================================
+            BUY AGAIN
+==========================================*/
+
+function buyAgain(orderId) {
+
+    const order = orders.find(item => item.orderId === orderId);
+
+    if (!order) return;
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    order.items.forEach(product => {
+
+        const existing = cart.find(item => item.id === product.id);
+
+        if (existing) {
+
+            existing.quantity += product.quantity;
+
+        } else {
+
+            cart.push({
+                ...product
+            });
+
+        }
+
+    });
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    showToast("Products added to Cart 🛒");
+
+}
+
+/*==========================================
+            TRACK ORDER
+==========================================*/
+
+function trackOrder(orderId) {
+
+    alert(
+        "Order " +
+        orderId +
+        "\n\nCurrent Status : Delivered ✅"
+    );
+
+}
+
+/*==========================================
+            VIEW DETAILS
+==========================================*/
+
+function viewDetails(orderId) {
+
+    const order = orders.find(item => item.orderId === orderId);
+
+    if (!order) return;
+
+    let message = "";
+
+    message += "Order ID : " + order.orderId + "\n\n";
+
+    message += "Date : " + order.orderDate + "\n\n";
+
+    message += "Payment : " + order.payment + "\n\n";
+
+    message += "Total : " + order.total + "\n\n";
+
+    message += "Products\n\n";
+
+    order.items.forEach(product => {
+
+        message +=
+            product.name +
+            " x " +
+            product.quantity +
+            "\n";
+
+    });
+
+    alert(message);
+
+}
+
+/*==========================================
+            TOAST
+==========================================*/
+
+function showToast(message) {
+
+    const toast = document.getElementById("toast");
+
+    if (!toast) return;
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 2500);
+
+}
+
+/*==========================================
+        UPDATE CART BADGE
+==========================================*/
+
+updateCartBadge();
+
+function updateCartBadge() {
+
+    const badge = document.querySelector(".cart-count");
+
+    if (!badge) return;
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        total += item.quantity;
+
+    });
+
+    badge.textContent = total;
+
+}
+
+/*==========================================
+        UPDATE WISHLIST BADGE
+==========================================*/
+
+updateWishlistBadge();
+
+function updateWishlistBadge() {
+
+    const badge = document.querySelector(".wishlist-count");
+
+    if (!badge) return;
+
+    const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    badge.textContent = wishlist.length;
+
+}
