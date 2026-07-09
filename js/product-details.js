@@ -10,7 +10,6 @@ const thumb1 = document.getElementById("thumb1");
 const thumb2 = document.getElementById("thumb2");
 const thumb3 = document.getElementById("thumb3");
 const thumb4 = document.getElementById("thumb4");
-const thumbs = document.querySelectorAll(".thumb");
 
 let quantity = 1;
 
