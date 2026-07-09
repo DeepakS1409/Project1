@@ -1,34 +1,61 @@
-let wishlist =
+/*==================================================
+                DEEPKART
+              WISHLIST PAGE
+==================================================*/
 
+let wishlist =
     JSON.parse(localStorage.getItem("wishlist")) || [];
 
 document.addEventListener("DOMContentLoaded", () => {
 
     loadWishlist();
 
+    updateCartBadge();
+
+    updateWishlistCount();
+
 });
+
+/*==========================================
+        LOAD WISHLIST
+==========================================*/
 
 function loadWishlist() {
 
     const container =
-
         document.getElementById("wishlistItems");
 
+    const count =
+        document.getElementById("wishlistCount");
+
     container.innerHTML = "";
+
+    count.textContent =
+        wishlist.length + (wishlist.length === 1 ? " Item" : " Items");
 
     if (wishlist.length === 0) {
 
         container.innerHTML = `
 
-        <div class="empty-cart">
+        <div class="empty-wishlist">
 
-        <i class="fa-solid fa-heart-crack"></i>
+            <i class="fa-solid fa-heart-crack"></i>
 
-        <h2>
+            <h2>Your Wishlist is Empty</h2>
 
-        Wishlist Empty
+            <p>
 
-        </h2>
+                Save your favourite products here and shop later.
+
+            </p>
+
+            <a href="index.html"
+
+            class="continue-btn">
+
+                Continue Shopping
+
+            </a>
 
         </div>
 
@@ -40,43 +67,110 @@ function loadWishlist() {
 
     wishlist.forEach(product => {
 
-        container.innerHTML += `
+        container.innerHTML += createWishlistCard(product);
 
-        <div class="product-card">
+    });
 
-            <img src="${product.image}">
+}
+/*==========================================
+        CREATE WISHLIST CARD
+==========================================*/
 
-            <div class="product-info">
+function createWishlistCard(product) {
 
-                <h3>
+    const rating = product.rating || 4.5;
 
-                    ${product.name}
+    const brand = product.brand || "DeepKart";
 
-                </h3>
+    const stock = product.stock || "In Stock";
 
-                <div class="cart-price">
+    const discount = product.discount || 0;
 
-                    ₹${product.price}
+    const oldPrice = Math.round(product.price / (1 - discount / 100));
 
-                </div>
+    return `
+
+    <div class="product-card">
+
+        <img src="${product.image}" onerror="this.src='images/no-image.png'"
+
+        <div class="product-info">
+
+            <div class="product-brand">
+
+                ${brand}
+
+            </div>
+
+            <div class="product-name">
+
+                ${product.name}
+
+            </div>
+
+            <div class="product-rating">
+
+                <i class="fa-solid fa-star"></i>
+
+                <span class="rating-value">
+
+                    ${rating}
+
+                </span>
+
+            </div>
+
+            <div class="product-price">
+
+                <span class="current-price">
+
+                    ${formatPrice(product.price)}
+
+                </span>
+
+                ${discount > 0 ? `
+
+                <span class="old-price">
+
+                    ${formatPrice(oldPrice)}
+
+                </span>
+
+                <span class="discount">
+
+                    ${discount}% OFF
+
+                </span>
+
+                ` : ""}
+
+            </div>
+
+            <span class="stock in">
+
+                ${stock}
+
+            </span>
+
+            <div class="product-actions">
 
                 <button
+                    class="cart-btn"
+                    onclick="moveToCart(${product.id})">
 
-                onclick="moveToCart(${product.id})"
+                    <i class="fa-solid fa-cart-shopping"></i>
 
-                class="cart-btn">
-
-                Add To Cart
+                    Move To Cart
 
                 </button>
 
                 <button
+                    class="remove-btn"
+                    onclick="removeWishlist(${product.id})">
 
-                onclick="removeWishlist(${product.id})"
+                    <i class="fa-solid fa-trash"></i>
 
-                class="remove-btn">
-
-                Remove
+                    Remove
 
                 </button>
 
@@ -84,49 +178,73 @@ function loadWishlist() {
 
         </div>
 
-        `;
+    </div>
+
+    `;
+}/*==========================================
+        UPDATE CART BADGE
+==========================================*/
+
+function updateCartBadge() {
+
+    const badge = document.querySelector(".cart-count");
+
+    if (!badge) return;
+
+    const cart =
+        JSON.parse(localStorage.getItem("cart")) || [];
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        total += item.quantity || 1;
 
     });
 
-}
+    badge.textContent = total;
+
+}/*==========================================
+        REMOVE FROM WISHLIST
+==========================================*/
 
 function removeWishlist(id) {
 
-    wishlist =
-
-        wishlist.filter(item => item.id !== id);
+    wishlist = wishlist.filter(product => product.id !== id);
 
     localStorage.setItem(
-
         "wishlist",
-
         JSON.stringify(wishlist)
-
     );
 
     loadWishlist();
 
+    updateWishlistCount();
+
+    showToast("Removed from Wishlist ❤️");
+
 }
+
+/*==========================================
+            MOVE TO CART
+==========================================*/
 
 function moveToCart(id) {
 
     let cart =
-
         JSON.parse(localStorage.getItem("cart")) || [];
 
     const product =
-
         wishlist.find(item => item.id === id);
 
     if (!product) return;
 
-    const exists =
-
+    const existing =
         cart.find(item => item.id === id);
 
-    if (exists) {
+    if (existing) {
 
-        exists.quantity++;
+        existing.quantity += 1;
 
     } else {
 
@@ -149,5 +267,129 @@ function moveToCart(id) {
     );
 
     removeWishlist(id);
+
+    updateCartBadge();
+
+    showToast("Moved to Cart 🛒");
+
+}
+
+/*==========================================
+        UPDATE WISHLIST BADGE
+==========================================*/
+
+function updateWishlistCount() {
+
+    const badge =
+        document.querySelector(".wishlist-count");
+
+    if (!badge) return;
+
+    badge.textContent = wishlist.length;
+
+}
+
+/*==========================================
+        UPDATE CART BADGE
+==========================================*/
+
+function updateCartBadge() {
+
+    const badge =
+        document.querySelector(".cart-count");
+
+    if (!badge) return;
+
+    const cart =
+        JSON.parse(localStorage.getItem("cart")) || [];
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        total += item.quantity || 1;
+
+    });
+
+    badge.textContent = total;
+
+}
+
+/*==========================================
+            TOAST MESSAGE
+==========================================*/
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+    if (!toast) return;
+
+    toast.innerHTML = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 2500);
+
+}/*==========================================
+            SEARCH WISHLIST
+==========================================*/
+
+const searchInput =
+    document.getElementById("wishlistSearch");
+
+if (searchInput) {
+
+    searchInput.addEventListener("keyup", function () {
+
+        const keyword =
+            this.value.toLowerCase();
+
+        const cards =
+            document.querySelectorAll(".product-card");
+
+        cards.forEach(card => {
+
+            const name =
+                card.querySelector(".product-name")
+                .textContent
+                .toLowerCase();
+
+            const brand =
+                card.querySelector(".product-brand")
+                .textContent
+                .toLowerCase();
+
+            if (
+                name.includes(keyword) ||
+                brand.includes(keyword)
+            ) {
+
+                card.style.display = "flex";
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+    });
+
+}
+
+/*==========================================
+        FORMAT ALL PRICES
+==========================================*/
+
+function formatPrice(price) {
+
+    return "₹" + Number(price).toLocaleString("en-IN");
 
 }

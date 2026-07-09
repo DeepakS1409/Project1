@@ -1,18 +1,540 @@
+/*==================================================
+                DEEPKART
+               WISHLIST PAGE
+==================================================*/
+
+
+/*==========================================
+            PAGE BACKGROUND
+==========================================*/
+
 body {
     background: #f5f7fb;
 }
 
-.wishlist-page {
+
+/*==========================================
+            WISHLIST BANNER
+==========================================*/
+
+.wishlist-banner {
     width: 90%;
+    max-width: 1400px;
+    margin: 35px auto;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    border-radius: 20px;
+    padding: 45px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .12);
+    animation: fadeDown .6s ease;
+}
+
+.wishlist-banner h1 {
+    font-size: 38px;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.wishlist-banner h1 i {
+    margin-right: 10px;
+}
+
+.wishlist-banner p {
+    font-size: 17px;
+    opacity: .95;
+    line-height: 1.8;
+    max-width: 700px;
+}
+
+
+/*==========================================
+        MAIN CONTAINER
+==========================================*/
+
+.wishlist-container {
+    width: 90%;
+    max-width: 1400px;
     margin: 40px auto;
 }
 
-.wishlist-page h1 {
+
+/*==========================================
+        HEADER
+==========================================*/
+
+.wishlist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 30px;
 }
 
+.wishlist-header h2 {
+    font-size: 30px;
+    color: #111827;
+}
+
+#wishlistCount {
+    background: #2563eb;
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/*==========================================
+        PRODUCT GRID
+==========================================*/
+
 #wishlistItems {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+
+/*==========================================
+        EMPTY WISHLIST
+==========================================*/
+
+.empty-wishlist {
+    background: #fff;
+    border-radius: 20px;
+    padding: 70px 30px;
+    text-align: center;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, .08);
+}
+
+.empty-wishlist i {
+    font-size: 80px;
+    color: #ef4444;
+    margin-bottom: 25px;
+}
+
+.empty-wishlist h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #111827;
+}
+
+.empty-wishlist p {
+    color: #6b7280;
+    font-size: 16px;
+    margin-bottom: 35px;
+    line-height: 1.8;
+}
+
+.empty-wishlist .continue-btn {
+    display: inline-block;
+    background: #2563eb;
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 30px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.empty-wishlist .continue-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-3px);
+}
+
+
+/*==========================================
+            ANIMATIONS
+==========================================*/
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/*==========================================
+            PRODUCT CARD
+==========================================*/
+
+.product-card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .08);
+    transition: .35s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .15);
+}
+
+
+/*==========================================
+            PRODUCT IMAGE
+==========================================*/
+
+.product-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: contain;
+    background: #f8fafc;
+    padding: 20px;
+    transition: .4s;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+
+/*==========================================
+            PRODUCT INFO
+==========================================*/
+
+.product-info {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.product-brand {
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.product-name {
+    font-size: 19px;
+    font-weight: 600;
+    color: #111827;
+    line-height: 1.5;
+    min-height: 58px;
+}
+
+
+/*==========================================
+            PRODUCT RATING
+==========================================*/
+
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.product-rating i {
+    color: #fbbf24;
+}
+
+.rating-value {
+    color: #374151;
+    font-weight: 600;
+}
+
+
+/*==========================================
+            PRODUCT PRICE
+==========================================*/
+
+.product-price {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.current-price {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+.old-price {
+    color: #9ca3af;
+    text-decoration: line-through;
+    font-size: 16px;
+}
+
+.discount {
+    background: #dcfce7;
+    color: #15803d;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/*==========================================
+            STOCK STATUS
+==========================================*/
+
+.stock {
+    display: inline-flex;
+    align-items: center;
+    width: max-content;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.stock.in {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.stock.out {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+
+/*==========================================
+            BUTTON AREA
+==========================================*/
+
+.product-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+
+/*==========================================
+        ADD TO CART BUTTON
+==========================================*/
+
+.cart-btn {
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.cart-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+
+/*==========================================
+        REMOVE BUTTON
+==========================================*/
+
+.remove-btn {
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 10px;
+    background: #ef4444;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.remove-btn:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+}
+
+
+/*==========================================
+            TOAST MESSAGE
+==========================================*/
+
+#toast {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background: #111827;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100px);
+    transition: .4s ease;
+    z-index: 9999;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .25);
+}
+
+#toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+
+/*==========================================
+            CUSTOM SCROLLBAR
+==========================================*/
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f3f4f6;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2563eb;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1d4ed8;
+}
+
+
+/*==========================================
+            LARGE LAPTOP
+==========================================*/
+
+@media(max-width:1200px) {
+    .wishlist-banner {
+        padding: 35px;
+    }
+    .wishlist-banner h1 {
+        font-size: 34px;
+    }
+    #wishlistItems {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/*==========================================
+            TABLET
+==========================================*/
+
+@media(max-width:992px) {
+    .wishlist-banner {
+        text-align: center;
+    }
+    .wishlist-banner p {
+        margin: auto;
+    }
+    .wishlist-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    #wishlistItems {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/*==========================================
+            MOBILE
+==========================================*/
+
+@media(max-width:768px) {
+    .wishlist-banner {
+        padding: 30px 25px;
+    }
+    .wishlist-banner h1 {
+        font-size: 30px;
+    }
+    .wishlist-banner p {
+        font-size: 15px;
+    }
+    .wishlist-container {
+        width: 95%;
+    }
+    #wishlistItems {
+        grid-template-columns: 1fr;
+    }
+    .product-card img {
+        height: 220px;
+    }
+    .product-name {
+        font-size: 17px;
+    }
+    .current-price {
+        font-size: 22px;
+    }
+}
+
+
+/*==========================================
+        SMALL MOBILE
+==========================================*/
+
+@media(max-width:480px) {
+    .wishlist-banner {
+        border-radius: 15px;
+        padding: 25px 20px;
+    }
+    .wishlist-banner h1 {
+        font-size: 26px;
+    }
+    .wishlist-header h2 {
+        font-size: 24px;
+    }
+    #wishlistCount {
+        font-size: 13px;
+    }
+    .product-info {
+        padding: 18px;
+    }
+    .cart-btn,
+    .remove-btn {
+        height: 45px;
+        font-size: 14px;
+    }
+    #toast {
+        width: 90%;
+        right: 5%;
+        top: 20px;
+        text-align: center;
+    }
+}
+
+
+/*==========================================
+            FADE ANIMATION
+==========================================*/
+
+.product-card {
+    animation: fadeUp .5s ease;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
