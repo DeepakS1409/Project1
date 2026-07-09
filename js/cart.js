@@ -175,7 +175,9 @@ function decreaseQuantity(id) {
 
     } else {
 
-        removeProduct(id);
+        if (confirm("Remove this product from your cart?")) {
+            removeProduct(id);
+        }
 
         return;
 
@@ -247,7 +249,7 @@ function updateSummary() {
 
     document.getElementById("gst").innerHTML =
 
-        "₹" + gst.toFixed(0);
+        "₹" + Math.round(gst).toLocaleString();
 
     document.getElementById("discount").innerHTML =
 
@@ -295,4 +297,16 @@ if (checkoutBtn) {
 
         window.location.href = "checkout.html";
     });
+}
+
+function clearCart() {
+
+    if (confirm("Clear your entire cart?")) {
+
+        cart = [];
+
+        saveCart();
+
+    }
+
 }

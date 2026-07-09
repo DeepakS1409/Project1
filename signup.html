@@ -1,45 +1,63 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Create Account | DeepKart</title>
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/signup.css">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Signup CSS -->
+    <link rel="stylesheet" href="css/signup.css">
+
 </head>
 
 <body>
 
     <div class="signup-container">
 
-        <!-- Left Section -->
+        <!-- ===========================================
+                    LEFT PANEL
+        ============================================ -->
+
         <div class="signup-left">
 
             <div class="brand">
+
                 <i class="fa-solid fa-cart-shopping"></i>
+
                 <h1>DeepKart</h1>
+
             </div>
 
-            <h2>Join DeepKart 🛍️</h2>
+            <h2>
+                Join DeepKart 🛍️
+            </h2>
 
             <p>
-                Create your account and enjoy secure shopping, exclusive offers, order tracking, and wishlist features.
+                Create your account and enjoy secure shopping, fast delivery, exclusive offers, wishlist, order tracking and much more.
             </p>
 
             <img src="images/signup-banner.png" alt="Signup Illustration">
 
         </div>
 
-        <!-- Right Section -->
+        <!-- ===========================================
+                    RIGHT PANEL
+        ============================================ -->
+
         <div class="signup-right">
 
             <form id="signupForm">
@@ -51,11 +69,17 @@
                 </p>
 
                 <!-- Full Name -->
+
                 <div class="input-group">
 
-                    <label for="fullname">Full Name</label>
+                    <label for="fullname">
+
+                        Full Name
+
+                    </label>
 
                     <div class="input-box">
+
                         <i class="fa-solid fa-user"></i>
 
                         <input type="text" id="fullname" placeholder="Enter your full name" required>
@@ -65,11 +89,17 @@
                 </div>
 
                 <!-- Email -->
+
                 <div class="input-group">
 
-                    <label>Email Address</label>
+                    <label for="email">
+
+                        Email Address
+
+                    </label>
 
                     <div class="input-box">
+
                         <i class="fa-solid fa-envelope"></i>
 
                         <input type="email" id="email" placeholder="Enter your email" required>
@@ -79,44 +109,60 @@
                 </div>
 
                 <!-- Phone -->
+
                 <div class="input-group">
 
-                    <label>Phone Number</label>
+                    <label for="phone">
+
+                        Phone Number
+
+                    </label>
 
                     <div class="input-box">
+
                         <i class="fa-solid fa-phone"></i>
 
-                        <input type="tel" id="phone" maxlength="10" pattern="[0-9]{10}" placeholder="Enter your mobile number" required>
+                        <input type="tel" id="phone" maxlength="10" placeholder="Enter your phone number" required>
 
                     </div>
 
                 </div>
 
                 <!-- Password -->
+
                 <div class="input-group">
 
-                    <label>Password</label>
+                    <label for="password">
+
+                        Password
+
+                    </label>
 
                     <div class="input-box">
 
                         <i class="fa-solid fa-lock"></i>
 
-                        <input type="password" id="password" placeholder="Create a password" required>
+                        <input type="password" id="password" placeholder="Create password" required>
 
-                        <button type="button" id="togglePassword" class="toggle-password">
+                        <button type="button" class="toggle-password" id="togglePassword">
 
-                        <i class="fa-solid fa-eye"></i>
+                            <i class="fa-solid fa-eye"></i>
 
-                    </button>
+                        </button>
 
                     </div>
 
                 </div>
 
                 <!-- Confirm Password -->
+
                 <div class="input-group">
 
-                    <label>Confirm Password</label>
+                    <label for="confirmPassword">
+
+                        Confirm Password
+
+                    </label>
 
                     <div class="input-box">
 
@@ -124,67 +170,94 @@
 
                         <input type="password" id="confirmPassword" placeholder="Confirm password" required>
 
-                        <button type="button" id="toggleConfirmPassword" class="toggle-password">
+                        <button type="button" class="toggle-password" id="toggleConfirmPassword">
 
-                        <i class="fa-solid fa-eye"></i>
+                            <i class="fa-solid fa-eye"></i>
 
-                    </button>
+                        </button>
 
                     </div>
 
                 </div>
 
                 <!-- Terms -->
+
                 <div class="options">
 
                     <label class="remember">
 
-                    <input type="checkbox" required>
+                        <input type="checkbox" required>
 
-                    I agree to the
-                    <a href="#">Terms & Conditions</a>
+                        I agree to the
+                        <a href="#">Terms & Conditions</a>
 
-                </label>
+                    </label>
 
                 </div>
 
                 <!-- Signup Button -->
-                <button class="signup-btn" type="submit">
-                Create Account
-            </button>
+
+                <button type="submit" class="signup-btn">
+
+                    Create Account
+
+                </button>
+
+                <!-- Validation Message -->
+
+                <p id="message"></p>
+
+                <!-- Divider -->
 
                 <div class="divider">
+
                     <span>OR</span>
+
                 </div>
 
-                <!-- Social Signup -->
+                <!-- Social Login -->
+
                 <div class="social-login">
 
                     <button type="button" class="google-btn">
-                    <i class="fab fa-google"></i>
-                    Continue with Google
-                </button>
+
+                        <i class="fab fa-google"></i>
+
+                        Continue with Google
+
+                    </button>
 
                     <button type="button" class="facebook-btn">
-                    <i class="fab fa-facebook-f"></i>
-                    Continue with Facebook
-                </button>
+
+                        <i class="fab fa-facebook-f"></i>
+
+                        Continue with Facebook
+
+                    </button>
 
                 </div>
+
+                <!-- Login -->
 
                 <p class="login-text">
 
                     Already have an account?
 
                     <a href="login.html">
-                    Login
-                </a>
+
+                        Login
+
+                    </a>
 
                 </p>
 
-                <a class="back-home" href="index.html">
-                ← Back to Home
-            </a>
+                <!-- Back -->
+
+                <a href="index.html" class="back-home">
+
+                    ← Back to Home
+
+                </a>
 
             </form>
 
@@ -197,4 +270,3 @@
 </body>
 
 </html>
-```

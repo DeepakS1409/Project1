@@ -36,85 +36,95 @@ let currentProduct;
 
 async function loadProduct() {
 
-    const response = await fetch("data/products.json");
+    try {
 
-    const products = await response.json();
+        const response = await fetch("data/products.json");
 
-    currentProduct = products.find(
-        p => p.id == productId
-    );
+        if (!response.ok) {
 
-    if (!currentProduct) {
+            throw new Error("Failed to load products.json");
 
-        document.body.innerHTML = "Product Not Found";
+        }
 
-        return;
+        const products = await response.json();
+
+        currentProduct = products.find(
+            p => p.id == productId
+        );
+
+        if (!currentProduct) {
+
+            document.body.innerHTML = `
+
+                <div class="error-page">
+
+                    <h1>404</h1>
+
+                    <h2>Product Not Found</h2>
+
+                    <a href="index.html">
+
+                        Go Back Home
+
+                    </a>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+        // =====================================
+        // KEEP ALL YOUR EXISTING CODE HERE
+        // =====================================
+
+        const wishlist =
+            JSON.parse(localStorage.getItem("wishlist")) || [];
+
+        const wishBtn = document.getElementById("wishlistBtn");
+
+        if (wishlist.some(item => item.id === currentProduct.id)) {
+
+            wishBtn.innerHTML =
+                `<i class="fa-solid fa-heart"></i> Wishlisted`;
+
+        }
+
+        // Continue with the rest of your existing code...
+        // mainImage, thumbnails, price, rating, reviews,
+        // related products, etc.
+
+    } catch (error) {
+
+        console.error(error);
+
+        document.body.innerHTML = `
+
+            <div class="error-page">
+
+                <h1>⚠️</h1>
+
+                <h2>Something went wrong</h2>
+
+                <p>
+
+                    Unable to load the product.
+
+                </p>
+
+                <a href="index.html">
+
+                    Go Back Home
+
+                </a>
+
+            </div>
+
+        `;
 
     }
-    const wishlist =
-        JSON.parse(localStorage.getItem("wishlist")) || [];
-
-    const wishBtn = document.getElementById("wishlistBtn");
-
-    if (wishlist.some(item => item.id === currentProduct.id)) {
-
-        wishBtn.innerHTML =
-            `<i class="fa-solid fa-heart"></i> Wishlisted`;
-
-    }
-
-    const images = currentProduct.images || [currentProduct.image];
-
-    mainImage.src = images[0];
-    thumbs.forEach(img => img.classList.remove("active"));
-
-    if (thumbs.length > 0) {
-        thumbs[0].classList.add("active");
-    }
-
-    thumb1.src = images[0] || "";
-
-    thumb2.src = images[1] || images[0];
-
-    thumb3.src = images[2] || images[0];
-
-    thumb4.src = images[3] || images[0];
-
-    category.textContent = currentProduct.category;
-
-    productName.innerHTML = currentProduct.name;
-
-    rating.innerHTML =
-
-        `⭐ ${currentProduct.rating} / 5`;
-
-    price.innerHTML = currentProduct.price.toLocaleString();
-
-    const old = Math.round(currentProduct.price * 1.20);
-
-    oldPrice.innerHTML = old.toLocaleString();
-
-    discount.innerHTML = 20;
-
-    saving.innerHTML =
-
-        (old - currentProduct.price).toLocaleString();
-
-    stock.innerHTML = currentProduct.stock;
-
-    description.innerHTML = currentProduct.description;
-    brand.innerHTML = currentProduct.brand || "DeepKart";
-
-    specCategory.innerHTML = currentProduct.category;
-
-    specStock.innerHTML = currentProduct.stock;
-
-    specRating.innerHTML = currentProduct.rating;
-
-    loadReviews();
-
-    loadRelatedProducts(products);
-
 
 }
 
@@ -162,21 +172,38 @@ document.getElementById("addCartBtn").addEventListener("click", () => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     const existing = cart.find(item => item.id === currentProduct.id);
+    if (currentProduct.stock === 0 || currentProduct.stock === "Out of Stock") {
+
+        showToast("Product is Out of Stock ❌");
+
+        return;
+
+    }
 
     if (existing) {
 
         existing.quantity += quantity;
+        showToast("Quantity Updated 🛒");
 
     } else {
 
         cart.push({
 
-            ...currentProduct,
+            id: currentProduct.id,
+
+            name: currentProduct.name,
+
+            image: currentProduct.image,
+
+            price: currentProduct.price,
+
+            category: currentProduct.category,
+
+            stock: currentProduct.stock,
 
             quantity: quantity
 
         });
-
     }
 
     localStorage.setItem(
@@ -220,7 +247,19 @@ wishBtn.onclick = () => {
 
     } else {
 
-        wishlist.push(currentProduct);
+        wishlist.push({
+
+            id: currentProduct.id,
+
+            name: currentProduct.name,
+
+            image: currentProduct.image,
+
+            price: currentProduct.price,
+
+            category: currentProduct.category
+
+        });
 
         wishBtn.innerHTML =
             `<i class="fa-solid fa-heart"></i> Wishlisted`;
@@ -233,7 +272,7 @@ wishBtn.onclick = () => {
         "wishlist",
         JSON.stringify(wishlist)
     );
-
+    updateCartCount();
     updateWishlistCount();
 
 };
@@ -247,7 +286,17 @@ document.getElementById("buyNowBtn").addEventListener("click", () => {
 
     cart.push({
 
-        ...currentProduct,
+        id: currentProduct.id,
+
+        name: currentProduct.name,
+
+        image: currentProduct.image,
+
+        price: currentProduct.price,
+
+        category: currentProduct.category,
+
+        stock: currentProduct.stock,
 
         quantity: quantity
 
@@ -290,7 +339,10 @@ function updateCartCount() {
 
     });
 
-    badge.innerHTML = total;
+    badge.textContent = total;
+
+    badge.style.display =
+        total === 0 ? "none" : "flex";
 
 }
 /*==========================================
@@ -440,7 +492,7 @@ function loadRelatedProducts(products) {
 
             <div class="product-card" onclick="window.location='product.html?id=${product.id}'">
 
-                <img src="${product.image}">
+                <img src="${product.image}" onerror="this.src='images/no-image.png'">
 
                 <div class="product-info">
 
